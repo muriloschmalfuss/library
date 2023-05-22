@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BookMapper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">library</a> &gt; <a href="index.source.html" class="el_package">com.schmalfuss.library.model.mapper</a> &gt; <span class="el_source">BookMapper.java</span></div><h1>BookMapper.java</h1><pre class="source lang-java linenums">package com.schmalfuss.library.model.mapper;
+
+import com.schmalfuss.library.model.dto.BookDTO;
+import com.schmalfuss.library.model.entity.BookEntity;
+import org.springframework.stereotype.Component;
+
+@Component
+<span class="fc" id="L8">public class BookMapper {</span>
+
+    public BookDTO update(BookEntity bookEntity) {
+<span class="fc" id="L11">        BookDTO bookDTO = new BookDTO();</span>
+<span class="fc" id="L12">        bookDTO.setId(bookEntity.getId());</span>
+<span class="fc" id="L13">        bookDTO.setName(bookEntity.getName());</span>
+<span class="fc" id="L14">        bookDTO.setResume(bookEntity.getResume());</span>
+<span class="fc" id="L15">        bookDTO.setSummary(bookEntity.getSummary());</span>
+<span class="fc" id="L16">        bookDTO.setPrice(bookEntity.getPrice());</span>
+<span class="fc" id="L17">        bookDTO.setPages(bookEntity.getPages());</span>
+<span class="fc" id="L18">        bookDTO.setIsbn(bookEntity.getIsbn());</span>
+<span class="fc" id="L19">        bookDTO.setDatePublication(bookEntity.getDatePublication());</span>
+<span class="fc" id="L20">        return bookDTO;</span>
+    }
+
+    public BookEntity update(BookDTO bookDTO) {
+<span class="fc" id="L24">        BookEntity bookEntity = new BookEntity();</span>
+<span class="fc" id="L25">        bookEntity.setId(bookDTO.getId());</span>
+<span class="fc" id="L26">        bookEntity.setName(bookDTO.getName());</span>
+<span class="fc" id="L27">        bookEntity.setResume(bookDTO.getResume());</span>
+<span class="fc" id="L28">        bookEntity.setSummary(bookDTO.getSummary());</span>
+<span class="fc" id="L29">        bookEntity.setPrice(bookDTO.getPrice());</span>
+<span class="fc" id="L30">        bookEntity.setPages(bookDTO.getPages());</span>
+<span class="fc" id="L31">        bookEntity.setIsbn(bookDTO.getIsbn());</span>
+<span class="fc" id="L32">        bookEntity.setDatePublication(bookDTO.getDatePublication());</span>
+<span class="fc" id="L33">        return bookEntity;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

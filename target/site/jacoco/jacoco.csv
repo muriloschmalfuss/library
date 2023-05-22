@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+library,com.schmalfuss.library,LibraryApplication,5,3,0,0,2,1,1,1,1,1
+library,com.schmalfuss.library.model.entity,BookEntity,0,59,0,0,0,10,0,17,0,17
+library,com.schmalfuss.library.controller,BookController,14,99,0,0,5,28,0,7,0,7
+library,com.schmalfuss.library.model.mapper,BookMapper,0,79,0,0,0,21,0,3,0,3
+library,com.schmalfuss.library.model.dto,BookDTO,0,59,0,0,0,10,0,17,0,17
+library,com.schmalfuss.library.model.dto,MessageDTO,4,9,0,0,1,2,1,2,1,2
+library,com.schmalfuss.library.service,BookService,0,107,0,6,0,23,0,10,0,7

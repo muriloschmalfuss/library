@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BookService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">library</a> &gt; <a href="index.source.html" class="el_package">com.schmalfuss.library.service</a> &gt; <span class="el_source">BookService.java</span></div><h1>BookService.java</h1><pre class="source lang-java linenums">package com.schmalfuss.library.service;
+
+import com.schmalfuss.library.model.dto.BookDTO;
+import com.schmalfuss.library.model.entity.BookEntity;
+import com.schmalfuss.library.model.mapper.BookMapper;
+import com.schmalfuss.library.repository.BookRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L15">public class BookService {</span>
+
+    @Autowired
+    private BookRepository bookRepository;
+
+    @Autowired
+    private BookMapper bookMapper;
+
+    public List&lt;BookDTO&gt; getAll() {
+<span class="fc" id="L24">        List&lt;BookEntity&gt; entityList = bookRepository.findAll();</span>
+<span class="fc" id="L25">        return entityList.stream().map(bookEntity -&gt; bookMapper.update(bookEntity)).toList();</span>
+    }
+
+    public BookDTO getById(Long id) {
+<span class="fc" id="L29">        Optional&lt;BookEntity&gt; bookEntityOp = bookRepository.findById(id);</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        if (bookEntityOp.isPresent()) {</span>
+<span class="fc" id="L31">            BookEntity bookEntity = bookEntityOp.get();</span>
+<span class="fc" id="L32">            return bookMapper.update(bookEntity);</span>
+        }
+
+<span class="fc" id="L35">        throw new EntityNotFoundException(&quot;Livro não encontrado&quot;);</span>
+    }
+
+    public BookDTO create(BookDTO bookDTO) {
+<span class="fc" id="L39">        BookEntity book = bookMapper.update(bookDTO);</span>
+
+<span class="fc" id="L41">        bookRepository.save(book);</span>
+<span class="fc" id="L42">        return bookMapper.update(book);</span>
+    }
+
+    public BookDTO edit(BookDTO bookDTO, Long id) {
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if(bookRepository.existsById(id)) {</span>
+<span class="fc" id="L47">            BookEntity bookEntity = bookMapper.update(bookDTO);</span>
+<span class="fc" id="L48">            bookEntity.setId(id);</span>
+<span class="fc" id="L49">            bookEntity = bookRepository.save(bookEntity);</span>
+
+<span class="fc" id="L51">            return bookMapper.update(bookEntity);</span>
+        }
+
+<span class="fc" id="L54">        throw new EntityNotFoundException(&quot;Livro não encontrado&quot;);</span>
+    }
+
+    public void destroy(Long id) {
+<span class="fc" id="L58">        Optional&lt;BookEntity&gt; bookEntityOp = bookRepository.findById(id);</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (bookEntityOp.isPresent()) {</span>
+<span class="fc" id="L60">            BookEntity bookEntity = bookEntityOp.get();</span>
+<span class="fc" id="L61">            bookRepository.delete(bookEntity);</span>
+<span class="fc" id="L62">            return;</span>
+        }
+
+<span class="fc" id="L65">        throw new EntityNotFoundException(&quot;Livro não encontrado&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

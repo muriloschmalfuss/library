@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BookController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">library</a> &gt; <a href="index.source.html" class="el_package">com.schmalfuss.library.controller</a> &gt; <span class="el_source">BookController.java</span></div><h1>BookController.java</h1><pre class="source lang-java linenums">package com.schmalfuss.library.controller;
+
+import com.schmalfuss.library.model.dto.BookDTO;
+import com.schmalfuss.library.model.dto.MessageDTO;
+import com.schmalfuss.library.service.BookService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(&quot;/books&quot;)
+<span class="fc" id="L14">@Slf4j</span>
+<span class="fc" id="L15">public class BookController {</span>
+    @Autowired
+    private BookService bookService;
+
+    @GetMapping
+    public ResponseEntity&lt;Object&gt; list() {
+        try {
+<span class="fc" id="L22">            return ResponseEntity.ok(bookService.getAll());</span>
+<span class="nc" id="L23">        } catch (Exception e) {</span>
+<span class="nc" id="L24">            log.error(e.getMessage());</span>
+<span class="nc" id="L25">            return ResponseEntity</span>
+<span class="nc" id="L26">                    .status(HttpStatus.BAD_REQUEST)</span>
+<span class="nc" id="L27">                    .body(new MessageDTO(e.getMessage()));</span>
+        }
+    }
+
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Object&gt; show(@PathVariable(&quot;id&quot;) Long id) {
+        try {
+<span class="fc" id="L34">            return ResponseEntity.ok(bookService.getById(id));</span>
+<span class="fc" id="L35">        } catch (Exception e) {</span>
+<span class="fc" id="L36">            log.error(e.getMessage());</span>
+<span class="fc" id="L37">            return ResponseEntity</span>
+<span class="fc" id="L38">                    .status(HttpStatus.NOT_FOUND)</span>
+<span class="fc" id="L39">                    .body(new MessageDTO(e.getMessage()));</span>
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity&lt;Object&gt; create(@RequestBody BookDTO bookDTO) {
+        try {
+<span class="fc" id="L46">            return ResponseEntity.status(HttpStatus.CREATED).body(bookService.create(bookDTO));</span>
+<span class="fc" id="L47">        } catch (Exception e) {</span>
+<span class="fc" id="L48">            log.error(e.getMessage());</span>
+<span class="fc" id="L49">            return ResponseEntity</span>
+<span class="fc" id="L50">                    .status(HttpStatus.BAD_REQUEST)</span>
+<span class="fc" id="L51">                    .body(new MessageDTO(e.getMessage()));</span>
+        }
+    }
+
+    @PutMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Object&gt; edit(@RequestBody BookDTO bookDTO, @PathVariable(&quot;id&quot;) Long id) {
+        try {
+<span class="fc" id="L58">            return ResponseEntity.ok(bookService.edit(bookDTO, id));</span>
+<span class="fc" id="L59">        } catch (Exception e) {</span>
+<span class="fc" id="L60">            log.error(e.getMessage());</span>
+<span class="fc" id="L61">            return ResponseEntity</span>
+<span class="fc" id="L62">                    .status(HttpStatus.BAD_REQUEST)</span>
+<span class="fc" id="L63">                    .body(new MessageDTO(e.getMessage()));</span>
+        }
+    }
+
+    @DeleteMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Object&gt; remove(@PathVariable(&quot;id&quot;) Long id) {
+        try {
+<span class="fc" id="L70">            bookService.destroy(id);</span>
+<span class="fc" id="L71">            return ResponseEntity.ok(new MessageDTO(&quot;Livro removido com sucesso&quot;));</span>
+<span class="fc" id="L72">        } catch (Exception e) {</span>
+<span class="fc" id="L73">            log.error(e.getMessage());</span>
+<span class="fc" id="L74">            return ResponseEntity</span>
+<span class="fc" id="L75">                    .status(HttpStatus.NOT_FOUND)</span>
+<span class="fc" id="L76">                    .body(new MessageDTO(e.getMessage()));</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
